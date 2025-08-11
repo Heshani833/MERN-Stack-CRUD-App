@@ -73,7 +73,7 @@ const updateUser = async (req, res, next) => {
     let user;
 
     try {
-        user = await User.findById(id);
+        user = await User.findByIdAndUpdate(id);
     } catch (err) {
         console.error(err);
     }
@@ -96,7 +96,28 @@ const updateUser = async (req, res, next) => {
     return res.status(200).json({ user });
 }
 
+//delete user Details
+
+const deleteUser = async (req, res, next) => {
+    const id = req.params.id;
+
+    let user;
+
+    try{
+      user = await User.findByIdAndRemove(id);
+    }catch(err){
+      console.error(err);
+    }
+
+    if(!user){
+        return res.status(404).json({message: "No user found"});
+    }
+
+    return res.status(200).json({ message: "User deleted successfully" });
+}
+
 exports.getAllUsers = getAllUsers;
 exports.addUser = addUser;
 exports.GetById = GetById;
 exports.updateUser = updateUser;
+exports.deleteUser = deleteUser;
