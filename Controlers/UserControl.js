@@ -20,14 +20,14 @@ const getAllUsers = async (req, res, next) => {
 
 //data insert
 const addUser = async(req, res, next) => {
-     const { name, email, age, address} = req.body;
+     const { name, gmail, age, address} = req.body;
 
      let users;
 
      try {
-        users = new users({
+        users = new User({
             name,
-            email,
+            gmail,
             age,
             address
         });
@@ -44,5 +44,26 @@ const addUser = async(req, res, next) => {
 
 }
 
+//Get by ID
+
+const GetById = async (req, res, next) =>{
+
+    const id = req.params.id;
+
+    let user;
+    try {
+        user = await User.findById(id);
+    } catch (err) {
+        console.error(err);
+    }
+
+    if(!user){
+        return res.status(404).json({message: "No user found"});
+    }
+
+    return res.status(200).json({ user });
+}
+
 exports.getAllUsers = getAllUsers;
 exports.addUser = addUser;
+exports.GetById = GetById;
