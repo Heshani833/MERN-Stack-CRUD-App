@@ -64,6 +64,39 @@ const GetById = async (req, res, next) =>{
     return res.status(200).json({ user });
 }
 
+//Update user details
+
+const updateUser = async (req, res, next) => {
+    const id = req.params.id;
+    const { name, gmail, age, address } = req.body;
+
+    let user;
+
+    try {
+        user = await User.findById(id);
+    } catch (err) {
+        console.error(err);
+    }
+
+    if(!user){
+        return res.status(404).json({message: "No user found"});
+    }
+
+    user.name = name;
+    user.gmail = gmail;
+    user.age = age;
+    user.address = address;
+
+    try {
+        await user.save();
+    } catch (err) {
+        console.error(err);
+    }
+
+    return res.status(200).json({ user });
+}
+
 exports.getAllUsers = getAllUsers;
 exports.addUser = addUser;
 exports.GetById = GetById;
+exports.updateUser = updateUser;
