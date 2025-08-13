@@ -104,7 +104,7 @@ const deleteUser = async (req, res, next) => {
     let user;
 
     try{
-      user = await User.findByIdAndRemove(id);
+      user = await User.findByIdAndDelete(id);
     }catch(err){
       console.error(err);
     }
