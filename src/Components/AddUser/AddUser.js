@@ -1,14 +1,13 @@
 import React from "react";
+import Navbar from "../Navbar/Navbar";
 
-const User = (props) => {
-
-  const {_id, name, gmail, age, address} = props.user;
-
+const AddUser = () => {
   return (
-    <div>
-      <h1> User Display</h1>
-    </div>
+    <>
+      <Navbar />
+      <div>AddUser</div>
+    </>
   );
 };
 
-export default User;
+export default AddUser;

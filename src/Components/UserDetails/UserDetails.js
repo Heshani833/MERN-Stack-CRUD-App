@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
-import AddUser from "../AddUser/AddUser";
-
+import User from "../User/User";
 const URL = "http://localhost:5000/users";
 
 const fetchHandler = async () => {
@@ -23,7 +22,7 @@ const UserDetails = () => {
         {users &&
           users.map((user, i) => (
             <div key={i}>
-              <AddUser user={user} />
+              <User user={user} />
             </div>
           ))}
       </div>
