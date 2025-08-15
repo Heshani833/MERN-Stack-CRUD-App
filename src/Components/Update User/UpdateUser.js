@@ -1,55 +1,100 @@
-import React, {useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function UpdateUser() {
+  const [inputs, setInputs] = useState({});
+  const history = useNavigate();
+  const id = useParams().id;
 
-    const [inputs, setInputs] = useState({});
-    const history = useNavigate();
-    const { id } = useParams().id;
-
-    useEffect(() => {
-        const fetchHandler = async () => {
-            await axios
-            .get(`http://localhost:5000/users/${id}`)
-            .then((res) => res.data)
-            .then((data) => setInputs(data.user))
-        };
-        fetchHandler();
-    }, [id]);
-
-    const sendRequest = async () => {
-        await axios
-        .put(`http://localhost:5000/users/${id}`, {
-            name: String(inputs.name),
-            email: String(inputs.email),
-            age: Number(inputs.age),
-            address: String(inputs.address)
-        })
-        .then((res) => res.data);
-
-        
+  useEffect(() => {
+    const fetchHandler = async () => {
+      await axios
+        .get(`http://localhost:5000/users/${id}`)
+        .then((res) => res.data)
+        .then((data) => setInputs(data.user));
     };
+    fetchHandler();
+  }, [id]);
 
-      const handleChange = (e) => {
-        setInputs((prevState) => ({
-          ...prevState,
-          [e.target.name]: e.target.value,
-        }));
-      };
+  const sendRequest = async () => {
+    await axios
+      .put(`http://localhost:5000/users/${id}`, {
+        name: String(inputs.name),
+        gmail: String(inputs.gmail),
+        age: Number(inputs.age),
+        address: String(inputs.address),
+      })
 
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log(inputs);
-        sendRequest().then(() => history("/user-details"));
-      };
+      .then((res) => res.data);
+  };
+
+  const handleChange = (e) => {
+    setInputs((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(inputs);
+    sendRequest().then(() => history("/user-details"));
+  };
 
   return (
     <div>
       <h1>Update User</h1>
+      <form onSubmit={handleSubmit}>
+        <label>Name</label>
+        <br />
+        <input
+          type="text"
+          name="name"
+          onChange={handleChange}
+          value={inputs.name}
+          required
+        ></input>
+        <br />
+        <br />
+        <label>Gmail</label>
+        <br />
+        <input
+          type="gmail"
+          name="gmail"
+          onChange={handleChange}
+          value={inputs.gmail}
+          required
+        ></input>
+        <br />
+        <br />
+        <label>Age</label>
+        <br />
+        <input
+          type="number"
+          name="age"
+          onChange={handleChange}
+          value={inputs.age}
+          required
+        ></input>
+        <br />
+        <br />
+        <label>Address</label>
+        <br />
+        <input
+          type="text"
+          name="address"
+          onChange={handleChange}
+          value={inputs.address}
+          required
+        ></input>
+        <br />
+        <br />
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }
 
-export default UpdateUser
+export default UpdateUser;

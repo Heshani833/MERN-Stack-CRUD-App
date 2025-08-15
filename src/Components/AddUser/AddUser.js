@@ -40,17 +40,6 @@ const AddUser = () => {
       <Navbar />
       <div>AddUser</div>
       <form onSubmit={handleSubmit}>
-        <label>ID</label>
-        <br />
-        <input
-          type="number"
-          name="id"
-          onChange={handleChange}
-          value={inputs.id}
-          required
-        ></input>
-        <br />
-        <br />
         <label>Name</label>
         <br />
         <input

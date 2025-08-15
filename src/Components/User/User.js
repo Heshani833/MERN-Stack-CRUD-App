@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const User = ({ user = {} }) => {
   const { _id, name, gmail, age, address } = user;
@@ -11,7 +12,7 @@ const User = ({ user = {} }) => {
       <h2>Gmail: {gmail}</h2>
       <h2>Age: {age}</h2>
       <h2>Address: {address}</h2>
-      <button>Update</button>
+      <Link to={`/user-details/${_id}`}>Update</Link>
       <button>Delete</button>
 
       <br />
