@@ -1,12 +1,12 @@
 import React from "react";
 
 const User = ({ user = {} }) => {
-  const { id, name, gmail, age, address } = user;
+  const { _id, name, gmail, age, address } = user;
 
   return (
     <div>
       <h1>User Display</h1>
-      <h2>ID: {id}</h2>
+      <h2>ID: {_id}</h2>
       <h2>Name: {name}</h2>
       <h2>Gmail: {gmail}</h2>
       <h2>Age: {age}</h2>

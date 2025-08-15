@@ -19,10 +19,11 @@ const AddUser = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(inputs);
-    sendRequest().then(() => history("/user-details"));
+    await sendRequest();
+    history("/user-details");
   };
 
   const sendRequest = async () => {
@@ -39,7 +40,18 @@ const AddUser = () => {
       <Navbar />
       <div>AddUser</div>
       <form onSubmit={handleSubmit}>
-        <label>name</label>
+        <label>ID</label>
+        <br />
+        <input
+          type="number"
+          name="id"
+          onChange={handleChange}
+          value={inputs.id}
+          required
+        ></input>
+        <br />
+        <br />
+        <label>Name</label>
         <br />
         <input
           type="text"
