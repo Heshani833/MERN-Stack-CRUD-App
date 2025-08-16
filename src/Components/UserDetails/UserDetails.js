@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
 import User from "../User/User";
 import { useReactToPrint } from "react-to-print";
-import { useRef } from "react";
 const URL = "http://localhost:5000/users";
 
 const fetchHandler = async () => {
@@ -11,33 +10,63 @@ const fetchHandler = async () => {
 };
 
 const UserDetails = () => {
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     fetchHandler().then((data) => setUsers(data.users));
   }, []);
 
   //print function
-  const ComponentsRef = useRef();
+  const componentRef = useRef();
+
   const handlePrint = useReactToPrint({
-    content: () => ComponentsRef.current,
+    content: () => componentRef.current,
     documentTitle: "Users Report",
     onAfterPrint: () => alert("Print successful!"),
   });
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [noResults, setNoResults] = useState(false);
+
+  const handleSearch = () => {
+    fetchHandler().then((data) => {
+      const filteredUsers = data.users.filter((user) =>
+        Object.values(user).some((value) =>
+          value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      );
+      setUsers(filteredUsers);
+      setNoResults(filteredUsers.length === 0);
+    });
+  };
 
   return (
     <div>
       <Navbar />
       <h1>User Details Display Page</h1>
-      <div ref={ComponentsRef}>
-        {users &&
-          users.map((user, i) => (
-            <div key={i}>
-              <User user={user} />
-            </div>
-          ))}
-      </div>
-      <button onClick={handlePrint}>Print Users</button>
+      <input
+        onChange={(e) => setSearchQuery(e.target.value)}
+        type="text"
+        name="search"
+        placeholder="Search by name, email, or any field"
+      ></input>
 
+      <button onClick={handleSearch}>Search</button>
+
+      {noResults ? (
+        <div>No results found</div>
+      ) : (
+        <div ref={componentRef}>
+          {users &&
+            users.map((user, i) => (
+              <div key={i}>
+                <User user={user} />
+              </div>
+            ))}
+        </div>
+      )}
+      <button onClick={handlePrint} disabled={users.length === 0}>
+        Download Report
+      </button>
     </div>
   );
 };
