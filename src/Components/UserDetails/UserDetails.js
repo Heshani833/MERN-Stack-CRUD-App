@@ -39,6 +39,18 @@ const UserDetails = () => {
     });
   };
 
+  const handleSendReport = () => {
+    // Logic to send the report
+    const phoneNumber = "+94703065969";
+    const message = `selected User Reports`;
+    const WhatsAppUrl = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
+      message
+    )}`;
+
+    //open the whatsapp chat in new window
+    window.open(WhatsAppUrl, "_blank");
+  };
+
   return (
     <div>
       <Navbar />
@@ -67,6 +79,9 @@ const UserDetails = () => {
       <button onClick={handlePrint} disabled={users.length === 0}>
         Download Report
       </button>
+      <br />
+      <br />
+      <button onClick={handleSendReport}>Send Report via WhatsApp</button>
     </div>
   );
 };
