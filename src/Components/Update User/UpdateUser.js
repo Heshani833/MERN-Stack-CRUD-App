@@ -1,16 +1,34 @@
-import React, { useState } from "react";
-import Navbar from "../Navbar/Navbar";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const AddUser = () => {
+function UpdateUser() {
+  const [inputs, setInputs] = useState({});
   const history = useNavigate();
-  const [inputs, setInputs] = useState({
-    name: "",
-    gmail: "",
-    age: "",
-    address: "",
-  });
+  const id = useParams().id;
+
+  useEffect(() => {
+    const fetchHandler = async () => {
+      await axios
+        .get(`http://localhost:5000/users/${id}`)
+        .then((res) => res.data)
+        .then((data) => setInputs(data.user));
+    };
+    fetchHandler();
+  }, [id]);
+
+  const sendRequest = async () => {
+    await axios
+      .put(`http://localhost:5000/users/${id}`, {
+        name: String(inputs.name),
+        gmail: String(inputs.gmail),
+        age: Number(inputs.age),
+        address: String(inputs.address),
+      })
+
+      .then((res) => res.data);
+  };
 
   const handleChange = (e) => {
     setInputs((prevState) => ({
@@ -22,23 +40,12 @@ const AddUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(inputs);
-    await sendRequest();
-    history("/user-details");
-  };
-
-  const sendRequest = async () => {
-    await axios.post("http://localhost:5000/users", {
-      name: String(inputs.name),
-      gmail: String(inputs.gmail),
-      age: Number(inputs.age),
-      address: String(inputs.address),
-    });
+    sendRequest().then(() => history("/user-details"));
   };
 
   return (
-    <>
-      <Navbar />
-      <div>AddUser</div>
+    <div>
+      <h1>Update User</h1>
       <form onSubmit={handleSubmit}>
         <label>Name</label>
         <br />
@@ -54,7 +61,7 @@ const AddUser = () => {
         <label>Gmail</label>
         <br />
         <input
-          type="email"
+          type="gmail"
           name="gmail"
           onChange={handleChange}
           value={inputs.gmail}
@@ -86,8 +93,8 @@ const AddUser = () => {
         <br />
         <button type="submit">Submit</button>
       </form>
-    </>
+    </div>
   );
-};
+}
 
-export default AddUser;
+export default UpdateUser;

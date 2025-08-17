@@ -21,6 +21,11 @@ const Navbar = () => {
             <h1>UserDetails</h1>
           </Link>
         </li>
+        <li className="home-li">
+          <Link to="/register" className="nav-link">
+            <h1>Register</h1>
+          </Link>
+        </li>
       </ul>
     </div>
   );
