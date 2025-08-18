@@ -1,5 +1,5 @@
 import axios from "axios";
-import React  from "react";
+import Navbar from "../Components/Navbar/Navbar";
 import { use } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -45,7 +45,7 @@ const Register = () => {
 
   return (
     <div>
-      <nav />
+      <Navbar />
       <h1>User Register</h1>
       <form onSubmit={handleSubmit}>
         <label>Name</label>
