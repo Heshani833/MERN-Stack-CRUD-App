@@ -19,3 +19,25 @@ mongoose.connect("mongodb+srv://admin:atz0zLPX66IpqoaE@cluster0.b7xdaxc.mongodb.
 })
 
 .catch((err) => console.log(err));
+
+//call register model
+
+require("./Model/RegisterModel");
+const Register = mongoose.model("RegisterModel");
+app.post("/register", async (req, res) => {
+    const { name, email,  password } = req.body;
+    try {
+        await UserActivation.create({
+            name,
+            email,
+            password    
+        })
+
+        res.send({status: "ok"});
+
+    }
+
+    catch(err){
+        res.send({status:"error"})
+    }
+});

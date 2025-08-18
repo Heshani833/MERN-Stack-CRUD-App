@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const registerSchema = new Schema({
 name:{
     type: String,
     required: true //validate
@@ -12,12 +12,9 @@ gmail:{
     required: true //validate
 },
 
-age:{
-    type: Number,
-    required: true //validate
-},
 
-address:{
+
+password:{
     type: String,
     required: true //validate
 }
@@ -26,6 +23,6 @@ address:{
 });
 
 module.exports = mongoose.model(
-    "UserModel",  //filename
-    userSchema  //function name
+    "RegisterModel",  //filename
+    registerSchema  //function name
 );
