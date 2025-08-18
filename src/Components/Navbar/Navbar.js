@@ -26,6 +26,11 @@ const Navbar = () => {
             <h1>Register</h1>
           </Link>
         </li>
+        <li className="home-li">
+          <Link to="/login" className="nav-link">
+            <h1>Login</h1>
+          </Link>
+        </li>
       </ul>
     </div>
   );
