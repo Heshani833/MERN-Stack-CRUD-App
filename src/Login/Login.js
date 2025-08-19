@@ -1,9 +1,7 @@
 import axios from "axios";
 import Navbar from "../Components/Navbar/Navbar";
-import { use } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Navbar from "../Components/Navbar/Navbar";
 
 const Login = () => {
   const history = useNavigate();
@@ -21,18 +19,17 @@ const Login = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-try{
-    const response = await sendRequest();
-    if (response.status === "ok"  ){
+    try {
+      const response = await sendRequest();
+      if (response.status === "ok") {
         alert("User logged in successfully");
         history("/user-details");
-    }else{
+      } else {
         alert("Login failed, please check your credentials");
+      }
+    } catch (err) {
+      alert("error: " + err.message);
     }
-}catch(err){
-    alert("error: "+err.message);
-}
-
   };
 
   const sendRequest = async () => {
