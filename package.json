@@ -1,19 +1,19 @@
 {
-  "name": "mern-stack-crud-frontend",
+  "name": "mern-stack-crud-backend",
   "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "mongoose": "^8.17.2"
-  },
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "author": "Heshani Shehana",
   "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0"
+  },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.0.1"
   }
 }
