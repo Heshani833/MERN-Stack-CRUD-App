@@ -1,8 +1,19 @@
 {
-  "name": "mern-stack-crud-backend",
+  "name": "mern-stack-crud-frontend",
   "version": "1.0.0",
-  "description": "Backend for MERN Stack CRUD App",
-  "main": "app.js",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0",
+    "react-scripts": "5.0.1",
+    "react-to-print": "^3.1.1",
+    "web-vitals": "^2.1.4"
+  },
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
@@ -11,7 +22,6 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "mongoose": "^8.17.1"
   },
