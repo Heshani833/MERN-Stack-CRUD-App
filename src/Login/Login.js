@@ -8,6 +8,7 @@ const Login = () => {
   const [user, setUser] = useState({
     name: "",
     gmail: "",
+    password: "", // Add password to initial state
   });
 
   const handleInputChange = (e) => {
@@ -33,7 +34,7 @@ const Login = () => {
   };
 
   const sendRequest = async () => {
-    await axios
+    return await axios
       .post("http://localhost:5000/login", {
         gmail: user.gmail,
         password: user.password,
